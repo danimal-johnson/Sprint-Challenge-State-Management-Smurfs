@@ -1,50 +1,37 @@
-import React from 'react';
-import axios from 'axios';
-
-const API_BASE_URL = "http://localhost:3333";
+import React, { useContext, useState } from 'react';
+import { StoreContext } from '../reducers/Store';
+export const ADD_SMURF = "ADD_SMURF";
+export const LIST_SMURFS = "LIST_SMURFS";
 
 export default function Form() {
+  const [state, dispatch] = useContext(StoreContext);
 
   const handy = () => {
     console.log("Adding Handy");
-    axios.post(`${API_BASE_URL}/smurfs`, {
-      name: 'Handy',
-      age: 50,
-      height: "8cm",
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    dispatch({type: ADD_SMURF, payload: 
+      {
+        name: 'Handy',
+        age: 50,
+        height: "8cm",
+      }});
   }
 
   const smurfette = () => {
     console.log("Adding Smurfette");
-    axios.post(`${API_BASE_URL}/smurfs`, {
+    dispatch({type: ADD_SMURF, payload: 
+    {
       name: 'Smurfette',
       age: 22,
       height: "5cm",
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    }});
   }
 
   const viewSmurfs = () => {
-    axios
-    .get(`${API_BASE_URL}/smurfs`)
-    .then(res => console.log(res))
-    .catch(err => console.error(err));
+    dispatch({type: LIST_SMURFS})
   }
 
   return (
     <div>
-
 
       <button onClick={handy}>Add Handy</button>
       <button onClick={smurfette}>Add Smurfette</button>
