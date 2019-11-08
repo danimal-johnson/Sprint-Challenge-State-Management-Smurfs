@@ -1,9 +1,13 @@
-import React, { Component } from "react";
-import Store from "../reducers/Store";
+import React, { useContext, useState  } from "react";
+import { StoreContext } from '../reducers/Store';
 
 export default function Village() {
-
+  const [state, dispatch] = useContext(StoreContext);
   return (
-    <div>The smurf village will be displayed here</div>
+    <div>
+      <div>The smurf village will be displayed here</div> 
+
+
+    </div>
   )
 }
