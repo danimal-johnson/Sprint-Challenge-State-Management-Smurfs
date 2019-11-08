@@ -16,11 +16,7 @@ const appReducer = (state, action) => {
   switch (action.type) {
     case ADD_SMURF:
       console.log("Adding a smurf");
-      axios.post(`${API_BASE_URL}/smurfs`, {
-        name: 'Handy',
-        age: 50,
-        height: "8cm",
-      })
+      axios.post(`${API_BASE_URL}/smurfs`, action.payload)
       .then(function (response) {
         console.log(response);
       })
@@ -30,12 +26,11 @@ const appReducer = (state, action) => {
 
       return state; // Don't change the state.
     case LIST_SMURFS:
-        axios
+        return axios
         .get(`${API_BASE_URL}/smurfs`)
         .then(res => console.log(res))
         .catch(err => console.error(err));
-
-      return state; // Return the results of Axios, if successful
+        //  TODO: Error checking
     default:
       console.error ("Unhandled state in appReducer.");
   }
